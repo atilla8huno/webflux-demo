@@ -37,6 +37,6 @@ public class DemoApplication extends AbstractReactiveMongoConfiguration {
 
     @Override
     protected String getDatabaseName() {
-        return "demo-webflux";
+        return "webflux-demo";
     }
 }
