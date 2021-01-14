@@ -3,6 +3,7 @@ package com.webflux.demo.web;
 import com.webflux.demo.dao.User;
 import com.webflux.demo.dao.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -27,7 +28,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Flux<UserDTO> findByName(String name) {
-        return dao.findAllByName(name)
+        return Flux.just(name)
+                .doOnNext(nameParam -> {
+                    if (nameParam.length() < 4) {
+                        throw new IllegalArgumentException("Name param is illegal");
+                    }
+                })
+                .flatMap(dao::findAllByName)
                 .map(user -> UserDTO.builder()
                         .id(user.getId())
                         .name(user.getName())
@@ -35,7 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Mono<Void> deleteById(String id) {
+    public Mono<Void> deleteById(@NonNull String id) {
         return dao.deleteById(id);
     }
 }
