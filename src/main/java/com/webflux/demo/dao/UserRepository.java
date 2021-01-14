@@ -6,7 +6,6 @@ import reactor.core.publisher.Flux;
 
 @Repository
 public interface UserRepository extends ReactiveCrudRepository<User, String> {
-                                //extends ReactiveMongoRepository<User, String> {
 
     Flux<User> findAllByName(String name);
 }
