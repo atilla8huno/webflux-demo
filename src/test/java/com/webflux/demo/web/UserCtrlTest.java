@@ -85,7 +85,11 @@ public class UserCtrlTest {
 
     private void mockRepository() {
         Mockito.when(repository.findAllByName(eq("Jesus")))
-                .thenReturn(Flux.just(User.builder().id("1").name("Jesus").build()));
+                .thenReturn(Flux.just(
+                        User.builder().id("1").name("Jesus").build(),
+                        User.builder().id("2").name("Jesus").build(),
+                        User.builder().id("3").name("Jesus").build()
+                ));
 
         Mockito.when(repository.save(any()))
                 .thenReturn(Mono.just(User.builder().id("1").name("Jesus").build()));
