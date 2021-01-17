@@ -1,5 +1,5 @@
 # webflux-demo
-Demo project of Spring WebFlux
+Demo project of Spring WebFlux and Reactive Spring Data
 
 - To run/test the project, make sure there's a mongo db instance running locally, e.g.:
 
